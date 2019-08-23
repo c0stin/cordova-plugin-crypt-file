@@ -1,13 +1,13 @@
 module.exports = function(context) {
 
-    var path              = context.requireCordovaModule('path'),
-        fs                = context.requireCordovaModule('fs'),
-        crypto            = context.requireCordovaModule('crypto'),
-        Q                 = context.requireCordovaModule('q'),
+    var path              = require('path'),
+        fs                = require('fs'),
+        crypto            = require('crypto'),
+        Q                 = require('q'),
         cordova_util      = context.requireCordovaModule('cordova-lib/src/cordova/util'),
         platforms         = context.requireCordovaModule('cordova-lib/src/platforms/platforms'),
-        Parser            = context.requireCordovaModule('cordova-lib/src/cordova/metadata/parser'),
-        ParserHelper      = context.requireCordovaModule('cordova-lib/src/cordova/metadata/parserhelper/ParserHelper'),
+        // Parser            = context.requireCordovaModule('cordova-lib/src/cordova/metadata/parser'),
+        // ParserHelper      = context.requireCordovaModule('cordova-lib/src/cordova/metadata/parserhelper/ParserHelper'),
         ConfigParser      = context.requireCordovaModule('cordova-common').ConfigParser;
 
     var deferral = new Q.defer();
@@ -23,7 +23,7 @@ module.exports = function(context) {
     context.opts.platforms.filter(function(platform) {
         var pluginInfo = context.opts.plugin.pluginInfo;
         return pluginInfo.getPlatformsArray().indexOf(platform) > -1;
-        
+
     }).forEach(function(platform) {
         var platformPath = path.join(projectRoot, 'platforms', platform);
         var platformApi = platforms.getPlatformApi(platform, platformPath);

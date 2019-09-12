@@ -1,4 +1,5 @@
 module.exports = function(context) {
+    if (context.cmdLine.indexOf('--debug') !== -1) return;
 
     var path              = require('path'),
         fs                = require('fs'),
@@ -6,8 +7,6 @@ module.exports = function(context) {
         Q                 = require('q'),
         cordova_util      = context.requireCordovaModule('cordova-lib/src/cordova/util'),
         platforms         = context.requireCordovaModule('cordova-lib/src/platforms/platforms'),
-        // Parser            = context.requireCordovaModule('cordova-lib/src/cordova/metadata/parser'),
-        // ParserHelper      = context.requireCordovaModule('cordova-lib/src/cordova/metadata/parserhelper/ParserHelper'),
         ConfigParser      = context.requireCordovaModule('cordova-common').ConfigParser;
 
     var deferral = new Q.defer();
@@ -15,8 +14,6 @@ module.exports = function(context) {
 
     var key = crypto.randomBytes(24).toString('base64');
     var iv = crypto.randomBytes(12).toString('base64');
-
-    console.log('key=' + key + ', iv=' + iv)
 
     var targetFiles = loadCryptFileTargets();
 
